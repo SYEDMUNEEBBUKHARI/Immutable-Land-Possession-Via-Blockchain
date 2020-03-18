@@ -1,27 +1,99 @@
 import React , { useState } from  "react"
 import  "../navbar/sidebar.css"
-
-
+import {Modal,Button,Form,Image, Col,Row} from "react-bootstrap";
+import {GoHome, GoTag} from 'react-icons/go';
+import {GiTeacher} from 'react-icons/gi';
+import {TiSocialTwitterCircular,TiSocialGithubCircular,TiSocialYoutubeCircular,
+  TiSocialGooglePlusCircular,TiSocialFacebookCircular, TiSocialLinkedinCircular} from 'react-icons/ti'
+import Logo from '../../assets/Siacoin_logo_green.svg'
 const mysidebar=props=>{
+
+    const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
 let drawerclasses="setsidebar";
 if(props.show){
     drawerclasses="setsidebaropen";
 }
+const myfunc=()=>{
+  console.log("clicked");
+}
 
 return(
+    <React.Fragment>    
+       
+  
+    <ul bsprefix="litext" className="navAlign">
     <div className={drawerclasses} >
-    <ul>
-<li> <a href=""> Home </a></li>
-<li><a href="#turn">Services</a></li>
+    <br></br>
+    <br></br>
+         <Image src={Logo}  width= '75px' height='auto'/>
+        <h2 className="text-center logocolorbrand " >SyLand</h2>
+    
+    <hr />
+    <br></br>
+    <br></br>
+    <br></br>
 
-<li><a href="">Signup</a></li>
 
+
+<li> 
+&nbsp;
+&nbsp;
+
+  <a href=""> <GoHome className="iconcolor" /> Home          </a>
+  
+</li>
+   
+
+<li>
+&nbsp;
+&nbsp;
+ <a href="#turn"> <GiTeacher  className="iconcolor" /> Services          </a></li>
+<br />
+<br />
+<br />
+
+<Row>
+  
+<Col  sm={6} >
+<h4><TiSocialYoutubeCircular className="iconcolor1"/></h4>
+</Col>
+
+<Col sm={6} >
+<h4><TiSocialGithubCircular className="iconcolor1"/></h4>
+</Col>
+<Col ></Col>
+<Col  >
+<h4><TiSocialLinkedinCircular className="iconcolor1"/></h4>
+</Col>
+<Col  >
+<h4><TiSocialFacebookCircular className="iconcolor1"/></h4>
+</Col>
+
+
+<Col><span></span></Col>
+
+</Row>
+<p className="text-center colorblack"> 
+
+© 2015-2020 SyLand  (Lands Ledger)
+All rights reserved Privacy Policy                     
+
+</p>
+
+</div>
 
     </ul>
     
     
-    </div>
+    
+
+    
+    </React.Fragment>
+
 );
 };
 

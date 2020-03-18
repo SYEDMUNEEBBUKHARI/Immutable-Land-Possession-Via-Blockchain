@@ -55,14 +55,14 @@ return(
        <h1 className="text-center" id="turn">Services</h1>
 
    <Row noGutters={true} className="mre">
- <Col className="text-center" >
+ <Col className="text-center"  md={4} lg={4} sm={12} >
  
  <i class="fa fa-shield  fa-5x lor" aria-hidden="true"></i>
  <h5 className="text-center martop">Security</h5>
  <p className="justify-content">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries</p>
 
  </Col>
- <Col  className="text-center" >
+ <Col  className="text-center" md={4} lg={4}  sm={12}>
  
  <i class="fa fa-cubes fa-5x lor" aria-hidden="true"></i>
  <h5 className="text-center martop">BlockChain</h5>
@@ -70,7 +70,7 @@ return(
 
  </Col>
 
- <Col className="text-center">
+ <Col className="text-center" md={4} lg={4} sm={12}>
  <span className="reacticons">
  <FaStamp className=" lor fa-5x  "  />
  </span>
@@ -85,7 +85,7 @@ return(
 
 
    <Row noGutters={true} className="mre">
- <Col className="text-center" >
+ <Col className="text-center" md={4} lg={4} sm={12}>
  <span className="reacticons">       
  <FaFileContract class="  fa-5x lor" />
  </span>
@@ -93,7 +93,7 @@ return(
  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries</p>
  
  </Col>
- <Col  className="text-center" >
+ <Col  className="text-center" md={4} lg={4} sm={12}>
  <span className="reacticons">   
  <GiHouseKeys class="fa fa-cubes fa-5x lor" />
  </span>
@@ -101,7 +101,7 @@ return(
  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries</p>
  </Col>
 
- <Col className="text-center">
+ <Col className="text-center" md={4} lg={4} sm={12}>
  <span className="reacticons">
  <MdVerifiedUser className=" lor fa-5x  "  />
  </span>
