@@ -22,9 +22,9 @@ return(
        
 <Container className="remove-opacity">
    
-   <div class="mouse">
-				<a href="#" class="mouse-icon">
-					<div class="mouse-wheel"><span class="ion-ios-arrow-round-down"></span></div>
+   <div className="mouse">
+				<a href="#" className="mouse-icon">
+					<div className="mouse-wheel"><span className="ion-ios-arrow-round-down"></span></div>
                    
                 </a>
 			</div>

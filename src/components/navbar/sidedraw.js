@@ -58,14 +58,14 @@ return(
 
 <Row>
   
-<Col  sm={6} >
+<Col   >
 <h4><TiSocialYoutubeCircular className="iconcolor1"/></h4>
 </Col>
 
-<Col sm={6} >
+<Col  >
 <h4><TiSocialGithubCircular className="iconcolor1"/></h4>
 </Col>
-<Col ></Col>
+
 <Col  >
 <h4><TiSocialLinkedinCircular className="iconcolor1"/></h4>
 </Col>
@@ -74,7 +74,7 @@ return(
 </Col>
 
 
-<Col><span></span></Col>
+
 
 </Row>
 <p className="text-center colorblack"> 
