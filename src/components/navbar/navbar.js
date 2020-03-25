@@ -13,10 +13,8 @@ import "../navbar/navbar.css";
 import axios from 'axios';
 import ipfs from '../../ipfs';
 import Login from './Login';
-// const BrowserRouter = require("react-router-dom").BrowserRouter;
-// const Route = require("react-router-dom").Route;
-// const Link = require("react-router-dom").Link;
-// import Login from '../navbar/login';
+import {browserHistory} from "react-router";
+
 
 
 const formvalid=(formErrors)=>{
@@ -246,8 +244,13 @@ else{
        });
    }
 
+
+
+
    showComponentHandler=()=>{
 
+
+browserHistory.push("/sign-in");
 
     this.setState((prevstate)=>{
 if(prevstate.showcomponent)
@@ -273,6 +276,7 @@ else{
        this.setState({showsign: true});
    }
    makefalse=()=>{
+    browserHistory.push("/");
      this.setState({showcomponent: false})
    }
 render(){
@@ -331,132 +335,10 @@ if(this.state.showsign){
 
 
 
-{/* <Modal show={this.state.showsign} onHide={this.handleClose}>
-        <Modal.Header bsPrefix="modal-header" className="d-block">
-          <Modal.Title><MdPerson className="signup2"  /> Sign-in</Modal.Title>
-         </Modal.Header>
-         <Modal.Body>
-           <form >
-           <Form>
-   <Form.Group controlId="formBasicEmail">
-     <Form.Label>Email address</Form.Label>
-     <Form.Control type="email" placeholder="Enter email" />
-     <Form.Text className="text-muted">
-       We'll never share your email with anyone else.
-     </Form.Text>
-   </Form.Group>
-
-   <Form.Group controlId="formBasicPassword">
-     <Form.Label>Password</Form.Label>
-     <Form.Control type="password" name="password" onChange={this.handelchange}      placeholder="Password" />
-  {this.state.formErrors.password.length>0 && (<span className="clralert">{this.state.formErrors.password}</span>)}
-{this.state.flag== true  && (<span className="MakeGreen">oka</span>)}
-  
-   </Form.Group>
-
-
-   
-   <Form.Group controlId="formBasicCheckbox">
-     <Form.Check type="checkbox" label="Check me out" />
-   </Form.Group>
-      <Button variant="primary" className="chkbtn"  onSubmit={this.handelsubmit}>
-    Submit
-   </Button>
- </Form>
- </form>
- </Modal.Body>
-         <Modal.Footer>
-           <Button variant="secondary" className="chkbtn" onClick={this.handleClose}>
-             Close
-           </Button>
-           <Button variant="primary" className="chkbtn" onClick={this.handleRegister}>
-             Register
-           </Button>
-         </Modal.Footer>
-       </Modal> */}
 
 
 
-                                {/* Register */}
-
-
-       {/* <Modal dialogClassName="my-modal" show={this.state.showRegister} onHide={this.handleRegClose}>
-        <Modal.Header bsPrefix="modal-header " className="d-block" >
-         <Modal.Title ><MdPerson className="signup2" /> Register</Modal.Title>
-         </Modal.Header>
-         <Modal.Body>
-          
-           <Form onSubmit={this.SubmitData5}>
-
-
-           <Form.Row>
-    <Form.Group as={Col} >
-      <Form.Label>Name</Form.Label>
-      <Form.Control  value={this.state.Name} 
-     onChange={this.updateName.bind(this)} 
-      placeholder="Enter email" />
-    </Form.Group>
-
-    <Form.Group as={Col} controlId="formGridPassword">
-      <Form.Label>Image</Form.Label>
-      <Form.Control type="file" placeholder="Password"  onChange={this.captureFile} />
-    </Form.Group>
-  </Form.Row>
-  <Form.Row>
-    <Form.Group as={Col} controlId="formGridEmail">
-      <Form.Label>Email</Form.Label>
-      <Form.Control type="email"   
-      value={this.state.Email} 
-      onChange={this.updateEmail.bind(this)}   placeholder="Enter email" />
-    </Form.Group>
-
-    <Form.Group as={Col} controlId="formGridPassword">
-      <Form.Label>Password</Form.Label>
-      <Form.Control type="password" 
-value={this.state.Password} 
-onChange={this.updatePassword.bind(this)}        placeholder="Password" />
-    </Form.Group>
-  </Form.Row>
-
-  <Form.Group  as={Col} controlId="formGridAddress1">
-    <Form.Label>Address</Form.Label>
-    <Form.Control               value={this.state.Address} 
-     onChange={this.updateAddress.bind(this)}  placeholder="1234 Main St" />
-  </Form.Group>
-
-  
-
-  <Form.Row>
-  <Form.Group as={Col} controlId="formGridCountry">
-    <Form.Label>Country</Form.Label>
-    <Form.Control placeholder=""   
-    value={this.state.Country} 
-    onChange={this.updateCountry.bind(this)} 
-    />
-    
-  </Form.Group>
-  <Form.Group controlId="formGridCity" >
-    <Form.Label>City</Form.Label>
-    <Form.Control      value={this.state.City} 
-     onChange={this.updateCity.bind(this)}      placeholder="" />
-  </Form.Group>
-    
-  </Form.Row>
-
- 
-
-  <Button variant="primary"  className="chkbtn" type="submit" >
-    Submit
-  </Button>
-</Form>
- </Modal.Body>
-         <Modal.Footer>
-           <Button variant="secondary" onClick={this.handleRegClose} className="chkbtn">
-             Close
-           </Button>
-           
-         </Modal.Footer>
-       </Modal> */}
+       
       </React.Fragment>
 
 

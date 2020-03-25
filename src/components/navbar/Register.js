@@ -5,7 +5,10 @@ import {Modal,Button,Nav,Col,NavDropdown,Navbar,Form,FormControl, NavItem} from 
 import {TiThMenu} from "react-icons/ti";
 import{MdPerson} from "react-icons/md"
 import "../navbar/login.css"
-import ipfs from 'ipfs-api'
+// import ipfs from "ipfs-api";
+import ipfs from "../../ipfs"
+
+import {browserHistory} from "react-router";
 import axios from 'axios'
 class Register extends Component{
 
@@ -18,6 +21,8 @@ class Register extends Component{
         showco: true,
         password: null,
         showcomponent: false ,
+        
+        buffer: "",
         shown: false,
         Name: "",
         Password: "",
@@ -25,8 +30,7 @@ class Register extends Component{
         Address: "",
         City: "",
         Country: ""
-        , ipfsHash: "",
-        buffer: ""
+        , ipfsHash: ""
         ,
         formErrors:{
 
@@ -52,10 +56,10 @@ class Register extends Component{
       }
       updatePassword=(e)=>{
         e.preventDefault();
-        const{Password, value}=e.target;
-        console.log('Password', Password);
+        const{password, value}=e.target;
+        console.log('Password', password);
       console.log('value', value);
-      this.setState({Password: e.target.value});
+      this.setState({password: e.target.value});
       }
       updateCity=(e)=>{
         e.preventDefault();
@@ -83,19 +87,21 @@ class Register extends Component{
       }
       
     handleRegClose=()=>this.setState({showco: false});
-    SubmitData5 (e) {
 
+
+    SubmitData5 (e) {
+      console.log('buffer datatdatdtadtatdtadtatd',this.state.buffer);
         e.preventDefault();
         ipfs.files.add(this.state.buffer,(error, result)=>{
         if(error)
         {
           console.error("error");
         }
-        console.log('result',result[0].path);
+        console.log('result',result);
         
         this.setState({ipfsHash: result[0].path});
         
-        })
+        
         
         
         console.log("this.state.ipfsHash", this.state.ipfsHash);
@@ -121,7 +127,7 @@ class Register extends Component{
         this.setState({
         
           Name: " ",
-          Password: " ",
+          password: " ",
           Email:" ",
           Address: " ",
           City: " ",
@@ -129,9 +135,12 @@ class Register extends Component{
         ipfsHash: " "
         
         });
+      })
         
         }
+
         captureFile=(event)=>{
+
             console.log("Capture File");
             event.preventDefault();
             const file= event.target.files[0];
@@ -139,7 +148,7 @@ class Register extends Component{
             reader.readAsArrayBuffer(file);
             reader.onloadend=()=>{
               this.setState({buffer: Buffer(reader.result)});
-              console.log('buffer',this.state.buffer);
+              console.log('buffer will storeee',this.state.buffer);
             }}
         
 
@@ -181,7 +190,7 @@ return(
     <Form.Group as={Col} controlId="formGridPassword">
       <Form.Label>Password</Form.Label>
       <Form.Control type="password" 
-value={this.state.Password} 
+value={this.state.password} 
 onChange={this.updatePassword.bind(this)}        placeholder="Password" />
     </Form.Group>
   </Form.Row>
