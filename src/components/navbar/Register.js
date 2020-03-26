@@ -34,7 +34,7 @@ class Register extends Component{
         ,
         formErrors:{
 
-          password:" "
+          password:""
         },
         flag: false
     };
@@ -126,13 +126,13 @@ class Register extends Component{
         
         this.setState({
         
-          Name: " ",
-          password: " ",
-          Email:" ",
-          Address: " ",
-          City: " ",
-          Country: " ",
-        ipfsHash: " "
+          Name: "",
+          password: "",
+          Email:"",
+          Address: "",
+          City: "",
+          Country: "",
+        ipfsHash: ""
         
         });
       })

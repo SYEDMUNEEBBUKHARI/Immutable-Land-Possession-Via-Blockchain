@@ -22,29 +22,39 @@ import ipfs from '../ipfs';
 import Header from "./Header"
 class dashboard extends Component{
 
-   componentDidMount(){
 
-             var Email=localStorage.getItem("Email");
-             var Name=localStorage.getItem("Name");
-             var ipfsHash =localStorage.getItem("ipfsHash");
+    state={
+
+        logout: false,
+        store: "hiiii",
+        Emaild: "",
+        Named:"",
+        ipfsHashd: "",
+        loggin: false
+        
+        }
+        
+
+  componentDidMount(){
+      
+    const Email=  localStorage.getItem("Email");
+    const Name=  localStorage.getItem("Name");
+    const ipfsHash =  localStorage.getItem("ipfsHash");
+    this.setState({
+Emaild: Email,
+Named: Name,
+ipfsHashd: ipfsHash
 
 
 
-             this.setState({Email: Email
-            ,  Name: Name
-        ,
-    ipfsHash: ipfsHash});
+    });
+
+
+    
    }
 
     
 
-state={
-
-logout: false,
-store: "hiiii",
-Email: ""
-
-}
 
 
     runLogout=()=>{
@@ -53,6 +63,10 @@ Email: ""
 console.log("logging out ");
 
         localStorage.removeItem('token');
+        localStorage.removeItem('Name');
+        localStorage.removeItem('Email');
+        localStorage.removeItem('ipfsHash');
+
         
         this.setState({loggin: true})
         
@@ -63,6 +77,13 @@ console.log("logging out ");
        
 
 render(){
+
+    
+    console.log("property",this.props.location);
+
+console.log("Emailil", localStorage.getItem("Name"));
+
+    
     console.log("Email aya",this.state.Email);
 
 console.log(this.props);
@@ -102,7 +123,7 @@ console.log(this.props);
            
             
             <div>
-           <DropdownButton bsPrefix="btnsetting "  title={ this.state.Name }>
+           <DropdownButton bsPrefix="btnsetting "  title={ this.state.Named }>
   <Dropdown.Item as="button"><GoDashboard  className="signup"  />DASHBOARD</Dropdown.Item>
   <Dropdown.Item as="button"><GiIsland className="signup"  />Register Land</Dropdown.Item>
   <Dropdown.Item as="button" onClick={this.runLogout}><MdPerson className="signup"  />  Logout</Dropdown.Item>

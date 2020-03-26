@@ -5,16 +5,21 @@ import {Modal,Button,Nav,NavDropdown,Navbar,Form,FormControl, NavItem} from 'rea
 import {TiThMenu} from "react-icons/ti";
 import{MdPerson} from "react-icons/md"
 import Register from "./Register"
+import Home from "../../App"
 import {browserHistory} from "react-router";
 import {
-  BrowserRouter ,
+  BrowserRouter  ,
   Switch,
   Route,
   Link,
-  Redirect,
+  
+
   useHistory,
   useLocation
 } from "react-router-dom";
+import {Router as Router, Redirect} from 'react-router-dom';
+
+import history from '../../Services/history';
 import Dashboard from '../../DASHBOARD/dashboard'
 import "../navbar/login.css"
 const formvalid=(formErrors)=>{
@@ -51,6 +56,9 @@ class Login extends Component{
 
        
         password: "",
+        uName:"",
+        uIpfs:"",
+        uEmail:"",
       
         formErrors:{
 
@@ -156,6 +164,14 @@ class Login extends Component{
 
       
     handleClose = () => this.setState({showsign: false});
+
+
+
+
+
+
+
+
 handleRegister=()=>{
 
 
@@ -171,7 +187,8 @@ showsign: false
 
 
 
-  SubmitData55 (e) {
+
+ async  SubmitData55 (e) {
     
 
   e.preventDefault();
@@ -191,48 +208,28 @@ showsign: false
   var that=this;
 
   console.log("calling api");
-const token= axios.post("http://localhost:5000/Register/login", finaldata)
+const token= await axios.post("http://localhost:5000/Register/login", finaldata)
 .
   then(res=>{
-    console.log("ipfsHash",res.data.ipfsHash); 
-    
+    localStorage.setItem("token", res.data.token);
     localStorage.setItem("ipfsHash", res.data.ipfsHash);
     localStorage.setItem("Email", res.data.Email);
-    localStorage.setItem("Name", res.data.Name);
+    localStorage.setItem("Name", res.data.Name); }).then((result)=>{});
 
-
-   console.log("res",res.data.token); 
-     
-     console.log(res.data)
-
- 
+  this.setState({LoggedIn: true});
   
-  });
+
+
+
+
+
 console.log("that",this.state.Emaili);
   
 console.log("tokeeennnnn",token);
-localStorage.setItem("token", token);
+// localStorage.setItem("token", token);
 
 
-  let tokens=localStorage.getItem('token');
-  console.log("toki",tokens);
-    if(tokens)
-    {
-      console.log("token mila");
-      this.setState({LoggedIn: true});
-      
-    }
-    else{
-      // res.send("token is not available");
-    }
-  this.setState({
-  
-    password:"",
-    Email: ""
-  ,showsign:false
-    
-  
-  });
+ 
   
   }
 
@@ -240,17 +237,33 @@ localStorage.setItem("token", token);
 render(){
   
   console.log("Hi");
-  console.log("this.",this.state.Emaili);
-  if(this.state.LoggedIn ){
+ 
+
+  if(this.state.LoggedIn){
 
 console.log("bye");
+
+  // this.setState({
+  
+  //   password:"",
+  //   Email: ""
+  // ,showsign:false
     
-    return <Redirect  to={{
-      pathname: '/dashboard',
-      Email: this.state.Emaili,
-      ipfsHash: this.state.ipfsHashi,
-      Name: this.state.Namei
-    }}/>
+  
+  // });
+
+
+    console.log("nameeeeeeeeeeeeeeeeeeee");
+   
+    return <Redirect  to="/dashboard" />
+    
+    
+    
+    
+   
+ 
+ 
+ 
   }
 
 
