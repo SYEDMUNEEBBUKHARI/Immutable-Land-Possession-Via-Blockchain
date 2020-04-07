@@ -4,6 +4,11 @@
     background-color: rgba(14, 173, 104, 0.596) !important;
     
 }
+.navcolor{
+
+
+    background-color: red;
+}
 .MakeGreen{
     color: #0EAD69;
 }
@@ -23,9 +28,9 @@
 
     .chkbtn{
         border-style:hidden;
-        
-        border-color: #0EAD69 !important;
-        background-color: #0EAD69
+        color: black;
+        border-color: rgb(255, 255, 255) !important;
+        background-color: rgb(255, 255, 255)
         !important;
         
     }
@@ -45,7 +50,7 @@ color: #0EAD69;
         outline-offset: none !important;
     }
     .iconsy{
-                color:white;
+                color:rgb(0, 0, 0);
         
 
     }
@@ -115,9 +120,10 @@ button:visited{
     border-style:none;
 }
     .navbar{
-        background-color: rgba(14, 173, 104, 0.781);
+        background-color: rgb(255, 255, 255);
         opacity:1;
         margin-top:0%;
+        color: rgba(14, 173, 104, 0.596);
        
     }
    
@@ -144,3 +150,69 @@ background-color: black;
         font-size: 45px;
         text-align: center;
     }
+
+    .setDiv{
+
+        background-color: black;
+        
+        }
+
+        .setflex{
+           
+            margin-top: -0.5%;
+           margin-left:5%;
+           background-image: url("../assets/land2.jpeg");
+            padding-top: 50%;
+            padding-bottom: 50%;
+        
+       overflow: hidden;
+        
+        
+        
+        
+        }
+
+
+        .setflexx{
+           
+            margin-top: -0.5%;
+           margin-left:18%;
+                      background-image: url("../assets/land2.jpeg");
+            padding-top: 50%;
+            padding-bottom: 50%;
+        
+       
+            overflow: hidden;
+        
+        
+        
+        }
+
+
+
+    @media(min-width: 375px) and (max-width: 425px){
+  
+     
+    }
+    @media(min-width: 425px) and (max-width: 768px){
+    
+    
+  }
+    @media(min-width: 768px) and (max-width: 1024px){
+    
+    
+  }
+    @media(min-width: 1024px) and (max-width: 1440px){
+    
+    
+      
+  }
+  
+  
+  
+  @media(min-width: 1440px) and (max-width: 2560px){
+    
+  
+    
+      
+  }

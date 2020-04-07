@@ -2,7 +2,7 @@
 import React,{Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import styled from 'styled-components'
-import {Image,Modal,Alert,Col,Row,Button,Nav,DropdownButton,Dropdown,NavDropdown,Navbar,Form,FormControl, NavItem} from 'react-bootstrap';
+import {Image,Modal,Alert,Col,Row,Button,Nav,Container,DropdownButton,Dropdown,NavDropdown,Navbar,Form,FormControl, NavItem} from 'react-bootstrap';
 import {TiThMenu} from "react-icons/ti";
 import {FaDotCircle} from "react-icons/fa"
 import{MdPerson} from "react-icons/md"
@@ -18,7 +18,7 @@ import "./dashboard.css";
 import {browserHistory} from "react-router";
 import App from '../App';
 import ipfs from '../ipfs';
-
+import Drawer from "./Drawer";
 import Header from "./Header"
 class dashboard extends Component{
 
@@ -30,7 +30,9 @@ class dashboard extends Component{
         Emaild: "",
         Named:"",
         ipfsHashd: "",
-        loggin: false
+        loggin: false,
+        showdrawer: false,
+        showflex: 'setflex'
         
         }
         
@@ -54,7 +56,20 @@ ipfsHashd: ipfsHash
    }
 
     
+  drawerclickhand=(prevstate)=>{
+      
+    
+       this.setState((prevstate)=>{
+           if(prevstate.showdrawer){
+                return {showdrawer: false}
+           }
+           else{
+               return {showdrawer: true}
 
+           }
+       });
+     
+   }
 
 
     runLogout=()=>{
@@ -73,12 +88,22 @@ console.log("logging out ");
 
     }
 
-
+   
        
 
 render(){
+    let sidebar;
+    let showflex='setflex';
+   if(this.state.showdrawer){
+ sidebar= <Drawer click={'setAlign'} />;
+ showflex='setflexx';
+ 
+     }
+     else{
 
-    
+        sidebar= <Drawer click={'setAlig'} />;
+
+     }
     console.log("property",this.props.location);
 
 console.log("Emailil", localStorage.getItem("Name"));
@@ -108,20 +133,15 @@ console.log(this.props);
 
 
 </Switch>
+<Container>
             
             <Navbar   fixed="top"  collapseOnSelect expand="xxl"  >
             
-   
-            <Image src={Logo}  width= '55px' height='35px'/>
+            <Button bsPrefix="chkbtn"  position= "fixed"  onClick={this.drawerclickhand} ><TiThMenu className="iconsy" /></Button>
+            {/* <Image src={Logo}  width= '55px' height='35px'/> */}
            
             <Navbar.Collapse id="responsive-navbar-nav">
               
-            
-           
-            </Navbar.Collapse>
-
-           
-            
             <div>
            <DropdownButton bsPrefix="btnsetting "  title={ this.state.Named }>
   <Dropdown.Item as="button"><GoDashboard  className="signup"  />DASHBOARD</Dropdown.Item>
@@ -133,16 +153,36 @@ console.log(this.props);
              
             
             </div>
+           
+            </Navbar.Collapse>
+
+           
+            
+           
              </Navbar>  
+             </Container>
+             
 
 <br></br>
 <br></br>
 
-         
-<Header />
+    {sidebar}
+   
+    <div className={showflex}>
+    555
+</div>
+    
+    
+   
+   
+{/* <Header /> */}
+
 <br></br>
 
-            <div className="setfont">Land Records</div>
+          
+
+
+            
         </React.Fragment>
         </Router>
 
