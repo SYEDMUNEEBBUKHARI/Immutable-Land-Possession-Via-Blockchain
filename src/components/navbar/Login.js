@@ -214,7 +214,9 @@ const token= await axios.post("http://localhost:5000/Register/login", finaldata)
     localStorage.setItem("token", res.data.token);
     localStorage.setItem("ipfsHash", res.data.ipfsHash);
     localStorage.setItem("Email", res.data.Email);
-    localStorage.setItem("Name", res.data.Name); }).then((result)=>{});
+    localStorage.setItem("Name", res.data.Name); 
+    localStorage.setItem("Count", res.data.Count); 
+  }).then((result)=>{});
 
   this.setState({LoggedIn: true});
   
