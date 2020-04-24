@@ -1,27 +1,17 @@
 import React,{Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import axios from "axios"
-import {Modal,Button,Nav,NavDropdown,Navbar,Form,FormControl, NavItem} from 'react-bootstrap';
-import {TiThMenu} from "react-icons/ti";
+import {Modal,Button,Form} from 'react-bootstrap';
+
 import{MdPerson} from "react-icons/md"
 import Register from "./Register"
-import Home from "../../App"
-import {browserHistory} from "react-router";
-import {
-  BrowserRouter  ,
-  Switch,
-  Route,
-  Link,
-  
 
-  useHistory,
-  useLocation
-} from "react-router-dom";
+import {browserHistory} from "react-router";
+
 import {Router as Router, Redirect} from 'react-router-dom';
 
-import history from '../../Services/history';
-import Dashboard from '../../DASHBOARD/dashboard'
-import "../navbar/login.css"
+
+// import "../navbar/login.css"
 const formvalid=(formErrors)=>{
     let valid=true;
     
@@ -116,7 +106,7 @@ class Login extends Component{
 
 
     handelchange=(e)=>{
-        e.preventDefault;
+        e.preventDefault();
         const {name, value}=e.target;
         let formErrors= this.state.formErrors;
         console.log('name', name);
@@ -131,7 +121,8 @@ class Login extends Component{
             
             {formErrors.password="must be more than 5";
           
-            this.state.flag=false;
+           
+            this.setState({flag: false});
           
           }
             else{ `${this.state.flag=true}
@@ -205,12 +196,12 @@ showsign: false
   Email: this.state.Email
   }
 
-  var that=this;
+  // var that=this;
 
   console.log("calling api");
 const token= await axios.post("http://localhost:5000/Register/login", finaldata)
-.
-  then(res=>{
+
+  .then(res=>{
     localStorage.setItem("token", res.data.token);
     localStorage.setItem("ipfsHash", res.data.ipfsHash);
     localStorage.setItem("Email", res.data.Email);
@@ -309,7 +300,7 @@ return(
      <Form.Control type="password" name="password" onChange={this.handelchange} value={this.state.password} 
  placeholder="Password" />
   {this.state.formErrors.password.length>0 && (<span className="clralert">{this.state.formErrors.password}</span>)}
-{this.state.flag== true  && (<span className="MakeGreen">oka</span>)}
+{this.state.flag=== true  && (<span className="MakeGreen">oka</span>)}
   
    </Form.Group>
 

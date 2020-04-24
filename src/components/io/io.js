@@ -1,15 +1,15 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import styled from 'styled-components'
-import {fluid,Container, Jumbotron as Jumbo, Card , Row , Col, Image , Alert , Button , Nav , NavDropdown , Navbar , Form , FormControl, Jumbotron } from 'react-bootstrap';
-import Climage from '../../assets/GREEN.jpg';
+import {  Row , Col,  Jumbotron } from 'react-bootstrap';
+
 import '../../../node_modules/font-awesome/css/font-awesome.min.css';
-import Rimg from '../../assets/r.svg'
+
 import {FaStamp ,FaFileContract} from 'react-icons/fa';
 
 import {MdVerifiedUser} from 'react-icons/md'
  import {GiHouseKeys} from 'react-icons/gi'
-import {TiThMenu} from 'react-icons/ti'
+
 
 
 const Style = styled.div`

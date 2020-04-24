@@ -1,13 +1,13 @@
 import React,{Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import styled from 'styled-components'
-import {Modal,Alert,Col,Row,Button,Nav,NavDropdown,Navbar,Form,FormControl, NavItem} from 'react-bootstrap';
+
+import {Button,Navbar} from 'react-bootstrap';
 import {TiThMenu} from "react-icons/ti";
 import{MdPerson} from "react-icons/md"
-import Sidebar from "../../components/navbar/sidedraw"
+
 import Backdrop from "../navbar/backdrop"
 import Sdraw from "./sidedraw"
-import Load from "../container/mainload"
+
 import SideMod from "../navbar/signupmod"
 import "../navbar/navbar.css";
 import axios from 'axios';
@@ -141,8 +141,8 @@ Address: this.state.Address
 ,ipfsHash: this.state.ipfsHash
 }
 
-axios.post("http://localhost:5000/Register/add", finaldata).
-then(res=>{console.log(res.data)});
+axios.post("http://localhost:5000/Register/add", finaldata)
+.then(res=>{console.log(res.data)});
 
 this.setState({
 
@@ -172,7 +172,7 @@ reader.onloadend=()=>{
 }
 }
 handelchange=(event)=>{
-event.preventDefault;
+event.preventDefault();
 const {name, value}=event.target;
 let formErrors= this.state.formErrors;
 console.log('name', name);
@@ -187,8 +187,8 @@ switch(name){
     
     {formErrors.password="must be more than 5";
   
-    this.state.flag=false;
-  
+    //change
+  this.setState({flag: false});
   }
     else{ `${this.state.flag=true}
     
@@ -301,11 +301,7 @@ if(this.state.showsign){
   return (
 
     <React.Fragment>
-        
-    
-         
-
-    
+      
             <Navbar   fixed="top"  collapseOnSelect expand="xxl"  >
             {backdraw}
    

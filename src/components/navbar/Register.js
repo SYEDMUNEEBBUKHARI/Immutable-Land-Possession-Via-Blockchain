@@ -1,14 +1,14 @@
 import React,{Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-import {Modal,Button,Nav,Col,NavDropdown,Navbar,Form,FormControl, NavItem} from 'react-bootstrap';
-import {TiThMenu} from "react-icons/ti";
+import {Modal,Button,Col,Form} from 'react-bootstrap';
+
 import{MdPerson} from "react-icons/md"
 import "../navbar/login.css"
 // import ipfs from "ipfs-api";
 import ipfs from "../../ipfs"
 
-import {browserHistory} from "react-router";
+// import {browserHistory} from "react-router";
 import axios from 'axios'
 class Register extends Component{
 

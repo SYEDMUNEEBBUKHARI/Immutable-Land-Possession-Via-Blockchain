@@ -72,6 +72,13 @@ overflow: hidden;
 
 
     @media(min-width: 320px) and (max-width: 374px){
+      .makeDiv{
+        background-color: lawngreen;
+       position: relative;
+        
+        z-index:-1;
+        
+      }
   .adjust{
 
         color: green;
@@ -96,6 +103,7 @@ overflow: hidden;
        transform: translateX(-0%);
         
      transition: transform 0.3s ease-out;
+     position: fixed;
        
        
     }
@@ -111,10 +119,11 @@ overflow: hidden;
       .setAlig{
   
 
+        position: fixed;
 
         top: 40px;
-        Left: 0;
-       width: 100%;
+        Left: 110px;
+    width: 132%;
       
         height: 100%;
         background-color: white;
@@ -150,6 +159,14 @@ overflow: hidden;
 
 
       @media(min-width: 375px) and (max-width: 425px){
+
+        .makeDiv{
+          background-color: lawngreen;
+         position: relative;
+          
+          z-index:-1;
+          
+        }
         .adjust{
       
               color: green;
@@ -191,8 +208,8 @@ overflow: hidden;
       
       
               top: 40px;
-              Left: 0;
-             width: 100%;
+              Left: 170px;
+              width: 141%;
             
               height: 100%;
               background-color: white;
@@ -231,6 +248,13 @@ overflow: hidden;
 
 
       @media(min-width: 425px) and (max-width: 768px){
+        .makeDiv{
+          background-color: lawngreen;
+         position: relative;
+          
+          z-index:-1;
+          
+        }
       
         .adjust{
 
@@ -273,9 +297,8 @@ overflow: hidden;
   
   
           top: 40px;
-          Left: 0;
-         width: 100%;
-        
+          Left: 230px;
+    width: 149%;
           height: 100%;
           background-color: white;
           padding-top: 0%;
@@ -371,16 +394,16 @@ overflow: hidden;
         color: green;
         width: 90% important;
         height: auto;
-        margin-left: 100px;
+        margin-left: 80px;
         /* position: absolute !important; */
     
       }
       
       .dishide{
         /* position: absolute; */
-        font-size: 20px !important;
+        font-size: 25px;
         position: absolute;
-        padding-left: 10px;
+        padding-left: 25px;
        
       }
       /* merge navbar */
@@ -390,10 +413,10 @@ overflow: hidden;
 
         top: 40px;
         Left: 0;
-       width: 12%;
+       width: 10%;
       
         height: 100%;
-        background-color: white;
+        background-color: rgb(255, 255, 255);
         padding-top: 0%;
         padding-bottom: 0%;
         position: fixed;
@@ -407,28 +430,11 @@ overflow: hidden;
     }
     .adjustColors{
       color:  #0EAD69;
-      font-size: 35px !important;
+      font-size: 30px !important;
       height: auto;
-     margin-left:9px ;
-     position: relative;
 
     }
-    .setAlign{
-
-
-      top: 40px;
-      Left: -60px;
-      width: 25%;
-      height: 100%;
-      background-color: white;
-      padding-top: 0%;
-      padding-bottom: 0%;
-      position: fixed;
-     overflow: hidden;
-     
-     
-  }
-        
+      
         
     }
     

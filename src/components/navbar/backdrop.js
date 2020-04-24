@@ -1,6 +1,6 @@
 import React from "react";
 import "../navbar/backdrop.css";
-import {Modal,Button,Form} from "react-bootstrap";
+
 
 const backdrop=props=>(
 

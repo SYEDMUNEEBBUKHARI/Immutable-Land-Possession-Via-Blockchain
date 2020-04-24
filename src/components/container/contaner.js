@@ -1,10 +1,10 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import styled from 'styled-components'
-import {Container, Jumbotron as Jumbo, Card , Row , Col, Image , Alert , Button , Nav , NavDropdown , Navbar , Form , FormControl } from 'react-bootstrap';
-import Climage from '../../assets/GREEN.jpg';
+
+import {Container, Jumbotron as Jumbo,  Image  } from 'react-bootstrap';
+
 import Climage2 from '../../assets/1349937.svg';
-import Btnnn from '../Button/Button';
+
 import '../../../node_modules/font-awesome/css/font-awesome.min.css';
 import '../container/container.css'
 

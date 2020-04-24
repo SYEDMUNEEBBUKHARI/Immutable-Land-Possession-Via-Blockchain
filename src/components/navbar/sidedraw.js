@@ -1,10 +1,10 @@
 import React , { useState } from  "react"
 import  "../navbar/sidebar.css"
-import {Modal,Button,Form,Image, Col,Row} from "react-bootstrap";
+import {Image, Col,Row} from "react-bootstrap";
 import {GoHome, GoTag} from 'react-icons/go';
 import {GiTeacher} from 'react-icons/gi';
-import {TiSocialTwitterCircular,TiSocialGithubCircular,TiSocialYoutubeCircular,
-  TiSocialGooglePlusCircular,TiSocialFacebookCircular, TiSocialLinkedinCircular} from 'react-icons/ti'
+import {TiSocialGithubCircular,TiSocialYoutubeCircular,
+  TiSocialFacebookCircular, TiSocialLinkedinCircular} from 'react-icons/ti'
 import Logo from '../../assets/Siacoin_logo_green.svg'
 const mysidebar=props=>{
 

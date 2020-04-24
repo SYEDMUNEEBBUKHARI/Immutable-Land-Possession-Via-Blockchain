@@ -6,16 +6,16 @@ import './App.css';
 import Cont from '../src/components/container/contaner'
 import Io from '../src/components/io/io'
 import styled from 'styled-components';
-import red from './components/Button/Button';
+
 import '../node_modules/font-awesome/css/font-awesome.min.css'
 import Foott from '../src/components/footer/footer';
 
 // import axios from 'axios'
-import Sidebarr from "../src/components/navbar/sidedraw"
+
 import WhyBlock from "../src/components/whyblock/whyblock";
-import Load from "../src/components/container/mainload"
-import {Circular, Cube,CubeGrid } from "styled-loaders-react";
-import ReactCardFlip from 'react-card-flip';
+
+import {Cube } from "styled-loaders-react";
+
 import axios from 'axios';
 import {Switch, Route} from "react-router-dom";
 import Login from "./components/navbar/Login"

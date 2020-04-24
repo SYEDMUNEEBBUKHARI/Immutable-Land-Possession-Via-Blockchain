@@ -1,12 +1,11 @@
-pragma solidity >=0.4.15;
-
+pragma solidity >=0.4.25;
 contract LandOwnership{
 
 address public contractCreator;
 
     constructor()public{
 
-
+contractCreator=msg.sender;
    
     }
     
@@ -37,7 +36,7 @@ mapping(address=>BuyersRequestStatus) BuyersStatus;
     
     
     
-
+mapping(address=> bytes32[]) AssetList;
         mapping(bytes32 => bytes32)  public  Landinfo;
         mapping(bytes32=> uint) whtidis;
     
@@ -70,8 +69,18 @@ return d;
     
     
     
-     function viewAssets()public view returns(bytes32[] memory){
-        return (profile[msg.sender].noOfLand);
+     function viewAssets()public payable returns(bytes32[] memory){
+         
+         uint256  length= profile[msg.sender].noOfLand.length;
+         AssetList[msg.sender]=profile[msg.sender].noOfLand;
+         
+        //  string[val] memory z = profile[msg.sender].noOfLand;
+        //  string memory priorityList= new string(length);
+        //  string[] memory list = new string[](length);
+         
+        //  list=string(profile[msg.sender].noOfLand);
+         
+        return (AssetList[msg.sender]);
     }
     
     
@@ -131,7 +140,7 @@ function requestToLandOwner(bytes32 id) public {
         //last property
         bytes32 lastproperty=profile[previousOwner].noOfLand[profile[previousOwner].noOfLand.length-1];
         //last property id
-        
+        uint findlast=whtidis[lastproperty];
         
         // bytes32 hashLandLast= profile[previousOwner].noOfLand[lastproperty];
        // profile[previousOwner].noOfLand[findid]=profile[previousOwner].noOfLand[profile[previousOwner].noOfLand.length-1];
@@ -142,9 +151,10 @@ function requestToLandOwner(bytes32 id) public {
        
        
        delete   profile[previousOwner].noOfLand[profile[previousOwner].noOfLand.length-1];
-      profile[msg.sender].noOfLand.push(Landid);
+      
     profile[previousOwner].noOfLand.length--;
         
+        profile[msg.sender].noOfLand.push(Landid);
         
     }
 
