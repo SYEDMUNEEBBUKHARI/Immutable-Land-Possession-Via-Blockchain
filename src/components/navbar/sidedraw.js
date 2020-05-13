@@ -2,12 +2,22 @@ import React , { useState } from  "react"
 import  "../navbar/sidebar.css"
 import {Image, Col,Row} from "react-bootstrap";
 import {GoHome, GoTag} from 'react-icons/go';
+import {FiPocket} from "react-icons/fi";
 import {GiTeacher} from 'react-icons/gi';
 import {TiSocialGithubCircular,TiSocialYoutubeCircular,
   TiSocialFacebookCircular, TiSocialLinkedinCircular} from 'react-icons/ti'
 import Logo from '../../assets/Siacoin_logo_green.svg'
-const mysidebar=props=>{
+// import web3 from "../../web3";
+// import LandAbi from "../../LandAbi";
+import {Router as Router, Redirect} from 'react-router-dom';
+import Companyp from "../../companyportal/company";
+import {browserHistory} from "react-router";
+import {Switch, Route} from "react-router-dom";
+import LandAbi from "../../LandAbi";
+import web3 from "../../web3";
 
+const mysidebar=props=>{
+  const [flag, setflag] = useState(false);
     const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -17,9 +27,32 @@ let drawerclasses="setsidebar";
 if(props.show){
     drawerclasses="setsidebaropen";
 }
-const myfunc=()=>{
-  console.log("clicked");
+//  async function companyportal(){
+//    console.log("flag",flag);
+//   console.log("clicked");
+  
+//    const result = await LandAbi.methods.pak5().call();
+//   console.log("result", result);
+//   console.log("sflag",setflag);
+
+//   if(result)
+//   {
+//     setflag(true);
+    
+//   }
+// }
+async function chkcity(){
+  var Acc= await web3.eth.getAccounts();
+ const resultcity= await LandAbi.methods.checkcompanyportal().call({from: Acc[0]});
+console.log("resultcity",resultcity);
+if(resultcity==1)
+{
+  browserHistory.push("/companyportal");
+  <Route path="/companyportal" component={Companyp} />
+  return  <Redirect  to="/companyportal" />
 }
+}
+
 
 return(
     <React.Fragment>    
@@ -52,6 +85,11 @@ return(
 &nbsp;
 &nbsp;
  <a href="#turn"> <GiTeacher  className="iconcolor" /> Services          </a></li>
+
+ <li>
+&nbsp;
+&nbsp;
+ <button  className="btn btn" onClick={()=>{chkcity()}} > <FiPocket  className="iconcolor" /> Company Portal       </button></li>
 <br />
 <br />
 <br />

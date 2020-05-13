@@ -23,7 +23,8 @@ import Login from "./components/navbar/Login"
 import Dash from "./DASHBOARD/dashboard"
 import Register from "./components/navbar/Register"
 import {Router as Router, Redirect} from 'react-router-dom';
-import Routes from './Routes'
+import Routes from './Routes';
+import Company from "./companyportal/company";
 import history from './Services/history';
 const Sylee=styled.div`
 
@@ -78,6 +79,7 @@ setTimeout(()=>{
 
           <Route exact path="/" component={Home} />
           <Route path="/dashboard" component={Auth} />
+          <Route path="/companyportal" component={Company} />
           
 
 

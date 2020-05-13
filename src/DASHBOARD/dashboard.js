@@ -12,7 +12,7 @@ import history from '../Services/history';
 
 import socketIOClient from "socket.io-client";
 import "./dashboard.css";
-
+import RegistrationOnBlockchain from "./RegisterLand";
 
 import App from '../App';
 
@@ -20,7 +20,7 @@ import Drawer from "./Drawer";
 
 import Isi from "../assets/giphy.gif"
 import Bl from "../assets/Bl.gif"
-
+import BuyLand from "./BuyLand";
 class dashboard extends Component {
 
     constructor() {
@@ -60,23 +60,22 @@ class dashboard extends Component {
 
         });
 
-        const endpoint = this.state.endpoint;
-        //Very simply connect to the socket
-        const socket = socketIOClient(endpoint);
-        console.log("socketttt", socket);
-
-        // const LandDetail= await LandFact.methods.viewAssets.call();
-        // console.log("Land Details" , LandDetail);
-       
-        var result = await LandAbi.methods.landInfoOwner("0x7deddbeee2923bb35d0990c8f66cc70c7ebcfb6d756c63bc7b3abe44159adbf7").call();
+         var result = await LandAbi.methods.landInfoOwner("0x7deddbeee2923bb35d0990c8f66cc70c7ebcfb6d756c63bc7b3abe44159adbf7").call();
         console.log("result", result);
         const account= await web3.eth.getAccounts;
         console.log("Accounts", account);
+
+        const socket = socketIOClient(this.state.endpoint);
+        //Listen for data on the "outgoing data" namespace and supply a callback for what to do when we get one. In this case, we set a state variable
+        socket.on("outgoing data", data => console.log("ist",data));
+        
+
     }
 
 
     drawerclickhand = (prevstate) => {
-
+        const socket = socketIOClient(this.state.endpoint);
+        socket.emit("incoming data", "coolcup");
 
         this.setState((prevstate) => {
             if (prevstate.showdrawer) {
@@ -286,6 +285,9 @@ class dashboard extends Component {
            
             
             <ViewLand />
+            <BuyLand />
+
+            <RegistrationOnBlockchain />
             </Container>
 
             

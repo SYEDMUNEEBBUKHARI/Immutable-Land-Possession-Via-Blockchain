@@ -101,7 +101,7 @@ class Register extends Component{
         
         this.setState({ipfsHash: result[0].path});
         
-        
+      
         
         
         console.log("this.state.ipfsHash", this.state.ipfsHash);
