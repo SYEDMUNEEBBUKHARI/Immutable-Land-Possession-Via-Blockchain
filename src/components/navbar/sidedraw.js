@@ -1,4 +1,4 @@
-import React , { useState } from  "react"
+import React , { Component } from  "react"
 import  "../navbar/sidebar.css"
 import {Image, Col,Row} from "react-bootstrap";
 import {GoHome, GoTag} from 'react-icons/go';
@@ -10,21 +10,58 @@ import Logo from '../../assets/Siacoin_logo_green.svg'
 // import web3 from "../../web3";
 // import LandAbi from "../../LandAbi";
 import {Router as Router, Redirect} from 'react-router-dom';
-import Companyp from "../../companyportal/company";
+import Companyp from "../../DASHBOARD/company";
 import {browserHistory} from "react-router";
 import {Switch, Route} from "react-router-dom";
 import LandAbi from "../../LandAbi";
 import web3 from "../../web3";
+import {GiModernCity} from "react-icons/gi";
+import AuthenCityPortl from "../../DASHBOARD/Cityportal/Cityportal"
 
-const mysidebar=props=>{
-  const [flag, setflag] = useState(false);
-    const [show, setShow] = useState(false);
+class mysidebar extends Component{
+  state={
+setflag:false,
+setShow:false,
+went: false,
+resultstate:0,
+setcitypor:false
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  }
+  // const [flag, setflag] = useState(false);
+  //   const [show, setShow] = useState(false);
 
+   handleClose = () => this.setState({setShow:false});
+   handleShow = () => this.setState({setShow:true});
+   showpopup(){
+     this.setState({setcitypor: true});
+   }
+   async chkcity(){
+    var Acc= await web3.eth.getAccounts();
+   const resultcity= await LandAbi.methods.superuser().call({from: Acc[0]});
+   this.setState({resultstate: resultcity});
+  console.log("resultcity",resultcity);
+  
+  if(this.state.resultstate==1)
+  {
+    this.setState({went: true});
+  }
+  }
+
+render(){
+  if(this.state.went)
+  { this.setState({resultstate: 0});
+    return <Redirect to='/companyportal'  />
+  }
+  const closecitypor =()=>
+   {this.setState({setcitypor: false})};
+let CityportLogin;
+  if(this.state.setcitypor)
+  {
+       CityportLogin=<AuthenCityPortl click={closecitypor} />
+  }
+  console.log("went",this.state.went);
 let drawerclasses="setsidebar";
-if(props.show){
+if(this.props.show){
     drawerclasses="setsidebaropen";
 }
 //  async function companyportal(){
@@ -41,23 +78,13 @@ if(props.show){
     
 //   }
 // }
-async function chkcity(){
-  var Acc= await web3.eth.getAccounts();
- const resultcity= await LandAbi.methods.checkcompanyportal().call({from: Acc[0]});
-console.log("resultcity",resultcity);
-if(resultcity==1)
-{
-  browserHistory.push("/companyportal");
-  <Route path="/companyportal" component={Companyp} />
-  return  <Redirect  to="/companyportal" />
-}
-}
+
 
 
 return(
     <React.Fragment>    
        
-  
+  {CityportLogin}
     <ul bsprefix="litext" className="navAlign">
     <div className={drawerclasses} >
     <br></br>
@@ -89,7 +116,11 @@ return(
  <li>
 &nbsp;
 &nbsp;
- <button  className="btn btn" onClick={()=>{chkcity()}} > <FiPocket  className="iconcolor" /> Company Portal       </button></li>
+ <button  className="btn btn" onClick={()=>this.chkcity()} > <FiPocket  className="iconcolor" /> Company Portal       </button></li>
+ <li>
+&nbsp;
+&nbsp;
+ <button  className="btn btn" onClick={()=>this.showpopup()} > <GiModernCity className="iconcolor" /> City Portal        </button></li>
 <br />
 <br />
 <br />
@@ -133,6 +164,7 @@ All rights reserved Privacy Policy
     </React.Fragment>
 
 );
+}
 };
 
 

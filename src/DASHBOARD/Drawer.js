@@ -50,7 +50,7 @@ render(){
 <a className="adjust " href="" ><AiOutlineFileSearch className="adjustColors"  /> <span className="dishide">Search</span>  </a>   <br></br>
 <hr />
 
-<a className="adjust "  href=""><GiIsland className="adjustColors"  /> <span className="dishide">Land Details </span>     </a> <br></br>
+<a className="adjust "  href="#viewLand"><GiIsland className="adjustColors"  /> <span className="dishide">view Land  </span>     </a> <br></br>
 <hr />
 
 <a className="adjust "  href=""><FiSettings className="adjustColors"  />  <span className="dishide">Settings </span>  </a>  <br></br>

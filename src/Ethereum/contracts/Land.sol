@@ -1,18 +1,27 @@
-
 pragma solidity >=0.4.25;
+
 pragma experimental ABIEncoderV2;
 contract LandOwnership{
 
-address public contractCreator;
-
-    constructor()public{
-
-contractCreator=msg.sender;
    
+    
+    function superuser() public view returns(uint)
+    {
+        address admin=0xa2C1ee3dd1ac4b8Ed475396Fd1EF044Bcd25A40A;
+       if(admin == msg.sender)
+{
+    return 1;
+}
+else
+{
+    return 0;
+}
+
+        
     }
     
     
-    bytes32[] public memsale ;
+   
     
    struct individualLandList{
         bytes32[] noOfLand;   
@@ -24,309 +33,104 @@ contractCreator=msg.sender;
     
     struct LandDetails{
  address currentOwner;
- string completeAddress;
- string ipfshash;
- string contactnumber;
-
+ string completeaddress;
  string city;
  string country;
-bytes32 DUL;
- bool verifyStatus;
+ string LandArea;
+ bytes32 Landalreadyornot;
  bool LandSaleable;
-
-
-// BuyersRequestStatus BuyersStatus;
-mapping(address=> bool) willingClient;
-mapping (address=> bool) applyStatus;
-mapping(address=>BuyersRequestStatus) BuyersStatus;
+ bytes32 serialNo;
+ bool verifyLand;
+ // BuyersRequestStatus BuyersStatus;
+ mapping(address=> bool) willingClient;
+ mapping (address=> bool) applyStatus;
+ mapping(address=>BuyersRequestStatus) BuyersStatus;
+ mapping(bytes32=>address[])willingaddresses;
     }
     
-    
-    
-
-        mapping(bytes32 => bytes32)  public  Landinfo;
-        mapping(bytes32=> uint) whtidis;
+ 
+    mapping(bytes32=> uint) whtidis;
     
     uint  nonce=1;
 mapping(bytes32=> LandDetails) Land;
+mapping(bytes32=>bool) serialNoverification;
+uint count=0;
 
+mapping(string=>bytes32[]) companycontainLanid;
 
-
-
-
-    function LandRegistration (string memory completeAddress, string memory city, string memory  country, string memory ipfshash, string memory phonenum)   public  payable returns(bytes32 ){
+    function LandRegistration (string memory completeaddress, string memory city,string memory LandArea, address metaid, string memory ipfsh)   public  payable returns(bool ){
     
+    require(cityappmeta[msg.sender].cityapp[city]==true,"this is not city's portal id");
+
+    bytes32  d =sha256(abi.encodePacked("0x",completeaddress,metaid,count++));
+        require(!(serialNoverification[d]==true),"this serial number already exist");
+    require(! (Land[d].Landalreadyornot==d));
+    Land[d].currentOwner=metaid;
+    Land[d].completeaddress=completeaddress;
+    Land[d].LandArea=LandArea;
+    Land[d].serialNo=d;
+    Land[d].city=city;
     
+    companycontainLanid[city].push(d);
+    Land[d].Landalreadyornot=d;
+    profile[metaid].noOfLand.push(d);
+    whtidis[d]=profile[metaid].noOfLand.length-1;
     
+    serialNoverification[d]=true;
     
-string memory data=    string(abi.encodePacked(completeAddress ,city ,country, ipfshash, phonenum));
- 
- 
- 
- 
-
-       bytes32  d =sha256(abi.encodePacked("0x",data));
-require(! (Land[d].DUL==d));
-Land[d].currentOwner=msg.sender;
-Land[d].completeAddress=completeAddress;
-Land[d].ipfshash=ipfshash;
-Land[d].city=city;
-Land[d].country=country;
-Land[d].LandSaleable=false;
-Land[d].DUL=d;
-Land[d].verifyStatus=false;
-Land[d].contactnumber=phonenum;
-// Land[d].BuyersStatus=BuyersRequestStatus.empty;
-Landinfo[d]=d;
- profile[msg.sender].noOfLand.push(d);
-whtidis[d]=profile[msg.sender].noOfLand.length-1;
-
-commem[city].LandVerification.push(d);
-commem[city].commerialid[d]=commem[city].LandVerification.length-1;
-
-return d;
-
-
+    return true;
     }
     
-    
-    function companyboyApprovetodolist(string memory city)public view returns(bytes32[] memory)
+    function Cityandusers(string memory city) public view returns(bytes32[] memory)
     {
-        return commem[city].LandVerification;
+        
+        return companycontainLanid[city];
     }
     
-    function companyboycheckAuthentication(string memory city) public view returns(bool){
-        
-        require(ch[city].boycityappearence[msg.sender]);
-        return true;
-    }
-    
-    
-   function checkcompanyportal() public payable returns(uint)
-{
-
-address collect=pakistan();
-
-if(collect == msg.sender)
-{
-    return 1;
-}
-else
-{
-    return 0;
-}
 
     
-   
-    
-}
-
-function pakistan() internal  returns(address)
-{
-    address admin = 0x20db1A3eD27EEF75BEBb000961d07AD47Bf58197;
-    return admin;
-    
-}
-    
-    function companyboyApprove(bytes32 landid , string memory city) public
-    { 
-        require(ch[city].boycityappearence[msg.sender]);
-        
-        Land[landid].verifyStatus=true;
-        uint256 idd= commem[city].commerialid[landid];
-        require(!(idd==5000),"this has approved already");
-        commem[city].LandVerification[idd]=commem[city].LandVerification[commem[city].LandVerification.length-1];
-        
-        delete  commem[city].LandVerification[commem[city].LandVerification.length-1];
-        
-        commem[city].LandVerification.length--;
-        commem[city].commerialid[landid]=5000;
-        
-    }
-    
-    
-    
-    
-     function viewAssets()public view returns(bytes32[] memory){
+    function viewAssets()public view returns(bytes32[] memory)
+    {
         return (profile[msg.sender].noOfLand);
     }
     
     
-   
     
     
-     struct CompanyAdmins{
-         
-        string CCityName;
-        string AAdminName;
-        address AAdminAdress;
-        string hashh;
+    
+    
+    
+    function landInfoOwner(bytes32 enterid) public view returns(bytes32,address,string memory,string memory,bool , BuyersRequestStatus res ){
         
-        mapping(address => companyMembers) companyboys;
-        //boys array
-        address[] noofboys;
-        address[] noofadmins;
-        mapping(address => uint) boysid;
-         mapping(address => uint) adminsid;
-         
-       
-        mapping(address => bool) boycityappearence;
-         
-         
-        }
-        mapping(string => bool) adminscitystatus;
-        mapping(address => bool) adminsaddressstatus;
-         mapping(address => bool) boyappearence;
-    struct companyMembers
-    {
-        address[] approvers;
-        string cityName;
-        string boyName;
-        address boyAddress;
-        bytes32[]  LandVerification;
-        string ipfshasH;
-        mapping(bytes32 => uint256) commerialid;
-    }
     
-    mapping(string => CompanyAdmins) ch;
-    mapping(string => companyMembers) commem;
-    
-    function removeCitycoverage(string memory removecity ) public
-    {
-        require(msg.sender==0x20db1A3eD27EEF75BEBb000961d07AD47Bf58197);
-        delete ch[removecity];
-        uint idextract=companycityid[removecity];
-        uint lastidofcity=cityforcompany.length-1;
-        cityforcompany[idextract]=cityforcompany[lastidofcity];
-        delete cityforcompany[lastidofcity];
-        cityforcompany.length--;
-       string storage cityalpha = cityforcompany[idextract];
-       companycityid[cityalpha]=idextract;
         
+        return(Land[enterid].serialNo , Land[enterid].currentOwner , Land[enterid].completeaddress,Land[enterid].LandArea , Land[enterid].LandSaleable , Land[enterid].BuyersStatus[address(uint160(bytes20(enterid)))]);
     }
-    
-string[] public cityforcompany;
-mapping(string=> uint) companycityid;
+     bytes32[] memsale ;
+   mapping(bytes32=>uint)saleableid;
 
-function viewcities() public returns(string[] memory)
-{
-    require(msg.sender==0x20db1A3eD27EEF75BEBb000961d07AD47Bf58197);
-    return cityforcompany;
-}
-    
-    function makeadmin(string memory cityN, address adminAdress, string memory AdminName, string memory hash) public
-    {
-        require(msg.sender==0x20db1A3eD27EEF75BEBb000961d07AD47Bf58197);
-        require(!(ch[cityN].AAdminAdress==adminAdress ));
-         require(!(adminscitystatus[cityN]));
-        require(!(adminsaddressstatus[adminAdress]));
-       
-        ch[cityN].CCityName=cityN;
-        ch[cityN].AAdminAdress=adminAdress;
-        ch[cityN].AAdminName=AdminName;
-        
-        ch[cityN].hashh=hash;
-          ch[cityN].noofadmins.push(adminAdress);
-        ch[cityN].adminsid[adminAdress]=ch[cityN].noofadmins.length-1;
-      adminscitystatus[cityN]=true;
-        adminsaddressstatus[adminAdress]=true;
-        cityforcompany.push(cityN);
-        uint comid=cityforcompany.length-1;
-        companycityid[cityN]=comid;
-    }
-    
-    function checkAdmins(string memory city)public view returns(address[] memory)
-    {
-        require(msg.sender==0x20db1A3eD27EEF75BEBb000961d07AD47Bf58197);
-       return ch[city].noofadmins;
-    }
-    
-    //dudueduedueduedueudueduedueudueduedueudedueuddu
-    
-    function makeMember(string memory cityN, address boyAdress, string memory Name , string memory ipfshash) public
-    {
-        
-        require(adminscitystatus[cityN],"admin not available");
-        require(!(adminsaddressstatus[boyAdress]),"admin cannot become workboy");
-        require(!(boyappearence[boyAdress]),"boy already appeared in some city");
-        require(!(ch[cityN].boycityappearence[boyAdress]),"boy already appeared in current city");
-        
-        ch[cityN].companyboys[boyAdress].cityName=cityN;
-        ch[cityN].companyboys[boyAdress].boyName=Name;
-        ch[cityN].companyboys[boyAdress].boyAddress=boyAdress;
-        ch[cityN].companyboys[boyAdress].ipfshasH=ipfshash;
-        boyappearence[boyAdress]=true;
-        ch[cityN].boycityappearence[boyAdress]=true;
-        ch[cityN].noofboys.push(boyAdress);
-        ch[cityN].boysid[boyAdress]=ch[cityN].noofboys.length-1;
-        
-    }
-    function checkmember(string memory cityboy) public view returns(address[] memory)
-    {
-        
-        return ch[cityboy].noofboys;
-    }
-    
-    
-    function removeMember(string memory cityN, address boyAdress) public{
-        
-        uint bid=ch[cityN].boysid[boyAdress];
-        ch[cityN].noofboys[bid]=ch[cityN].noofboys[ch[cityN].noofboys.length-1];
-        delete ch[cityN].noofboys[ch[cityN].noofboys.length-1];
-        ch[cityN].noofboys.length--;
-        
-        delete ch[cityN].companyboys[boyAdress];
-         
-        
-
-          
-          boyappearence[boyAdress]=false;
-           ch[cityN].boycityappearence[boyAdress]=false;
-        
-    }
-    
-    
-    function landInfoOwner(bytes32 enterid) public view returns(string memory,string memory,address,string memory,string memory ,bool , BuyersRequestStatus res ){
-        
-    
-        
-        return(Land[enterid].contactnumber,Land[enterid].ipfshash,Land[enterid].currentOwner , Land[enterid].completeAddress, Land[enterid].ipfshash  , Land[enterid].LandSaleable , Land[enterid].BuyersStatus[address(uint160(bytes20(enterid)))]);
-    }
-    
-   
-    function makeSaleable(bytes32 property)public{
-        require(Land[property].currentOwner == msg.sender);
-        Land[property].LandSaleable=true;
-        
-        
+    function makeSaleable(bytes32 property)public returns(uint){
       
+        Land[property].LandSaleable=true;
+         memsale.push(property);
+      uint Landidlength=memsale.length-1;
+       saleableid[property]=Landidlength;
+       return Landidlength;
     } 
-    
-    
-    function forsale(bytes32 sale) private returns(uint)
-    {
-        memsale.push(sale);
-        
-        uint length=memsale.length-1;
-    return length;
-        
-    }
     
     
     function viewforsale() public view returns(bytes32[] memory)
 {
-    
     return memsale;
 }
 
-function deletesaleable(uint id, bytes32 lname)public {
+function deletesaleable( bytes32 lname)public {
     require(Land[lname].currentOwner==msg.sender);
-    require(memsale[id]== lname);
-    
-   
+    uint Landid= saleableid[lname];
     uint idd=memsale.length-1;
-    memsale[id]= memsale[idd];
+    memsale[Landid]= memsale[idd];
     memsale.length--;
+    delete saleableid[lname];
     
 }
 
@@ -338,6 +142,8 @@ function requestToLandOwner(bytes32 id) public {
         
         
         Land[id].willingClient[msg.sender]=true;
+        
+         Land[id].willingaddresses[id].push(msg.sender);
         
        Land[id].BuyersStatus[msg.sender] = BuyersRequestStatus.UnderCustody; //
         
@@ -368,23 +174,93 @@ function requestToLandOwner(bytes32 id) public {
         //last property
         bytes32 lastproperty=profile[previousOwner].noOfLand[profile[previousOwner].noOfLand.length-1];
         //last property id
-        
-        
-        // bytes32 hashLandLast= profile[previousOwner].noOfLand[lastproperty];
-       // profile[previousOwner].noOfLand[findid]=profile[previousOwner].noOfLand[profile[previousOwner].noOfLand.length-1];
-        
        profile[previousOwner].noOfLand[findid]=profile[previousOwner].noOfLand[profile[previousOwner].noOfLand.length-1];
        whtidis[lastproperty]=findid;
-       
-       
-       
        delete   profile[previousOwner].noOfLand[profile[previousOwner].noOfLand.length-1];
-      
-    profile[previousOwner].noOfLand.length--;
-        
+      profile[previousOwner].noOfLand.length--;
         profile[msg.sender].noOfLand.push(Landid);
         
     }
-
-
+    
+    
+    struct Approverstruct{
+        
+        string phno;
+        string city;
+        string email;
+        address metaid;
+    }
+    
+    mapping(string => Approverstruct) makeapprover;
+    address[] public approverlist;
+    mapping(address=>uint)approverid;
+   mapping(string=>bool) checkcity;
+   mapping(address=>bool) addressstatus;
+   struct approverchecker{
+       mapping(string=>bool) cityapp;
+   }
+   mapping(address=>approverchecker) cityappmeta;
+   string[] approverCities;
+    function registerapprover(string memory phno,string memory city,string memory email,address metaid)public returns(bool){
+        
+        require(msg.sender==0xa2C1ee3dd1ac4b8Ed475396Fd1EF044Bcd25A40A,"you dont have access");
+        require(!(checkcity[city]==true),"city already registered");
+        require(!(addressstatus[metaid]==true),"city alreay covered");
+     
+     makeapprover[city].phno=phno;
+     makeapprover[city].city=city;
+     makeapprover[city].email=email;
+     makeapprover[city].metaid=metaid;
+     approverlist.push(metaid);
+     uint apid=approverlist.length-1;
+     approverid[metaid]=apid;
+     checkcity[city]=true;
+     addressstatus[metaid]=true;
+     cityappmeta[metaid].cityapp[city]=true;
+     approverCities.push(city);
+     
+        return true;
+    }
+    
+  
+    
+    function approververify(bytes32 Landid) public returns(bool)
+    {
+        Land[Landid].verifyLand=true;
+        require(Land[Landid].verifyLand);
+    }
+    function viewapprover(string memory city)public view returns(string memory,string memory,string memory,address)
+    {
+    require(msg.sender==0xa2C1ee3dd1ac4b8Ed475396Fd1EF044Bcd25A40A,"you dont have access");
+        return (makeapprover[city].phno,makeapprover[city].city,makeapprover[city].email,makeapprover[city].metaid);
+    }
+    
+    function approverdata()public returns(string[] memory)
+    {
+        require(msg.sender==0xa2C1ee3dd1ac4b8Ed475396Fd1EF044Bcd25A40A,"you dont have access");
+        return approverCities;
+    }
+    
+    function cityLand(string memory city) public view returns(bytes32[] memory)
+    {
+        return companycontainLanid[city];
+    }
+    
+    function cityverify(address meta,string memory cicity)public returns(uint)
+{
+    if(cityappmeta[meta].cityapp[cicity]==true)
+    {
+        return 1;
+    }
+    else{
+        return 0;
+    }
+    
 }
+    }
+
+
+
+
+
+

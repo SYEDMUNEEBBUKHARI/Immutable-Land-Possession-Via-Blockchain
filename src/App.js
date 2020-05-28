@@ -6,7 +6,7 @@ import './App.css';
 import Cont from '../src/components/container/contaner'
 import Io from '../src/components/io/io'
 import styled from 'styled-components';
-
+import CityViewArrange from "./DASHBOARD/Cityportal/CityViewArrange";
 import '../node_modules/font-awesome/css/font-awesome.min.css'
 import Foott from '../src/components/footer/footer';
 
@@ -24,7 +24,7 @@ import Dash from "./DASHBOARD/dashboard"
 import Register from "./components/navbar/Register"
 import {Router as Router, Redirect} from 'react-router-dom';
 import Routes from './Routes';
-import Company from "./companyportal/company";
+import Company from "./DASHBOARD/company";
 import history from './Services/history';
 const Sylee=styled.div`
 
@@ -80,7 +80,7 @@ setTimeout(()=>{
           <Route exact path="/" component={Home} />
           <Route path="/dashboard" component={Auth} />
           <Route path="/companyportal" component={Company} />
-          
+          <Route path="/cityviewportal" component={CityViewArrange} />
 
 
 

@@ -8,7 +8,8 @@ class BuyLand extends React.Component{
     state={
         Account: "",
       
-        itemlist: ""
+        itemlist: "",
+        dataa:""
     }
     async componentDidMount(){
 
@@ -16,7 +17,10 @@ class BuyLand extends React.Component{
        var Acc= await web3.eth.getAccounts();
        console.log("ACC", Acc);
     this.setState({Account: Acc});
-
+    const data=await LandAbi.methods.viewforsale().call({from: Acc[0]});
+    console.log("dtatata",data);
+this.setState({dataa: data});
+console.log("dataa",this.state.dataa)
 
 }
 async makesaleable(data){
@@ -34,8 +38,8 @@ render(){
             <br></br>
             <ul>
 
-                <h2 className="text5">Buy Lands< GiIsland  /></h2>
-          
+                <h2 className="text5">Lands for Sale< GiIsland  /></h2>
+                   <div>{this.state.dataa}</div>
 
 
         </ul>

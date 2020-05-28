@@ -137,12 +137,11 @@ class dashboard extends Component {
 
         }
 
-        return ( <
-            Router history = { history } >
+        return ( 
+        <Router history = { history } >
 
 
-            <
-            React.Fragment >
+            <React.Fragment >
 
             < Switch >
 
@@ -198,31 +197,23 @@ class dashboard extends Component {
     
             { sidebar }
 
-            <
-            div className = { showflex } >
-            <
-            Container className = "makeDiv" >
+            <div className = { showflex } >
+            <Container className = "makeDiv" >
 
 
 
-            <
-            Row >
-            <
-            Col md = { 4 } >
+            <Row >
+            <Col md = { 4 } >
 
-            <
-            Card style = {
+            <Card style = {
                 { width: '15rem' } } >
-            <
-            Card.Img variant = "top"
+            <Card.Img variant = "top"
             src = { Isi }
             style = {
                 { height: '10rem' } }
-            /> <
-            Card.Body >
+            /> <Card.Body >
 
-            <
-            Card.Text >
+            <Card.Text >
             Connected Users { this.state.Count } </Card.Text>
 
             </Card.Body> </Card >  </Col>
@@ -285,9 +276,9 @@ class dashboard extends Component {
            
             
             <ViewLand />
-            <BuyLand />
+            {/* <BuyLand />
 
-            <RegistrationOnBlockchain />
+            <RegistrationOnBlockchain /> */}
             </Container>
 
             
