@@ -336,7 +336,7 @@ return(
 
 <Modal  show={this.state.showsign}  className=" setLogin" >
         <Modal.Header bsPrefix="modal-header" className="d-block">
-          <Modal.Title><MdPerson className="signup2"  /> Admin Detail</Modal.Title>
+          <Modal.Title><MdPerson className="signup2"  /> Add City Coverage</Modal.Title>
          </Modal.Header>
          <Modal.Body>
            

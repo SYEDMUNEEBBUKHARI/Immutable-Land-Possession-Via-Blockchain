@@ -42,13 +42,15 @@ else
  bytes32 serialNo;
  bool verifyLand;
  // BuyersRequestStatus BuyersStatus;
- mapping(address=> bool) willingClient;
+mapping(bytes32=> red) ared;
  mapping (address=> bool) applyStatus;
  mapping(address=>BuyersRequestStatus) BuyersStatus;
  mapping(bytes32=>address[])willingaddresses;
     }
     
- 
+ struct red{
+      mapping(address=> bool) willingClient;
+ }
     mapping(bytes32=> uint) whtidis;
     
     uint  nonce=1;
@@ -97,20 +99,25 @@ mapping(string=>bytes32[]) companycontainLanid;
     
     
     
+   
     
-    
-    
-    function landInfoOwner(bytes32 enterid) public view returns(bytes32,address,string memory,string memory,bool , BuyersRequestStatus res ){
+    function landInfoOwner(bytes32 enterid) public view returns(bytes32,address,string memory,string memory,bool  ){
         
     
         
-        return(Land[enterid].serialNo , Land[enterid].currentOwner , Land[enterid].completeaddress,Land[enterid].LandArea , Land[enterid].LandSaleable , Land[enterid].BuyersStatus[address(uint160(bytes20(enterid)))]);
+        return(Land[enterid].serialNo , Land[enterid].currentOwner , Land[enterid].completeaddress,Land[enterid].LandArea , Land[enterid].LandSaleable);
+    }
+
+    function LandBuyer(bytes32 enterid) public view returns(address[] memory)
+    {
+        
+    return Land[enterid].willingaddresses[enterid];
     }
      bytes32[] memsale ;
    mapping(bytes32=>uint)saleableid;
 
     function makeSaleable(bytes32 property)public returns(uint){
-      
+      require(Land[property].currentOwner == msg.sender);
         Land[property].LandSaleable=true;
          memsale.push(property);
       uint Landidlength=memsale.length-1;
@@ -124,13 +131,14 @@ mapping(string=>bytes32[]) companycontainLanid;
     return memsale;
 }
 
-function deletesaleable( bytes32 lname)public {
+function deletesaleable( bytes32 lname) private returns(bool) {
     require(Land[lname].currentOwner==msg.sender);
     uint Landid= saleableid[lname];
     uint idd=memsale.length-1;
     memsale[Landid]= memsale[idd];
     memsale.length--;
     delete saleableid[lname];
+    return true;
     
 }
 
@@ -138,10 +146,10 @@ function requestToLandOwner(bytes32 id) public {
         
         
         require(Land[id].LandSaleable);
-        require(!Land[id].willingClient[msg.sender]); 
         
         
-        Land[id].willingClient[msg.sender]=true;
+        
+        Land[id].ared[id].willingClient[msg.sender]=true;
         
          Land[id].willingaddresses[id].push(msg.sender);
         
@@ -149,8 +157,13 @@ function requestToLandOwner(bytes32 id) public {
         
         
     }
+     struct ApproverNote{
+        bytes32[] AddLand;
+    }
+    mapping(address=> ApproverNote) appnotifi;
+     mapping(bytes32=> uint) appnotiid;
     
-    function makeApproved(bytes32 Landid, address buyer) public{
+    function makeApproved(bytes32 Landid, address buyer) public returns(bool){
      bool chk= false;
    if(  Land[Landid].currentOwner == msg.sender)
    { 
@@ -161,11 +174,25 @@ function requestToLandOwner(bytes32 id) public {
        
           
     Land[Landid].BuyersStatus[buyer]= BuyersRequestStatus.Approved;
+    appnotifi[buyer].AddLand.push(Landid);
+    uint takelength=appnotifi[buyer].AddLand.length-1;
+    appnotiid[Landid]=takelength;
+ 
+    delete Land[Landid].ared[Landid];
+    delete Land[Landid].willingaddresses[Landid];
+    
+    return true;
         
     }
     
     
-    function BuyLand(bytes32 Landid)public{
+    function Landnotification ()public view returns(bytes32[] memory)
+    {
+    return appnotifi[msg.sender].AddLand;
+    }
+    
+    
+    function BuyLand(bytes32 Landid)public returns(bool){
         require( Land[Landid].BuyersStatus[msg.sender]== BuyersRequestStatus.Approved);
         //removeOwnership
         address previousOwner= Land[Landid].currentOwner;
@@ -179,6 +206,15 @@ function requestToLandOwner(bytes32 id) public {
        delete   profile[previousOwner].noOfLand[profile[previousOwner].noOfLand.length-1];
       profile[previousOwner].noOfLand.length--;
         profile[msg.sender].noOfLand.push(Landid);
+        Land[Landid].LandSaleable=false;
+         bool value=  deletesaleable(Landid);
+         uint index=appnotiid[Landid];
+          appnotifi[msg.sender].AddLand[index]=appnotifi[msg.sender].AddLand[appnotifi[msg.sender].AddLand.length-1];
+          delete appnotiid[Landid];
+          delete appnotifi[msg.sender].AddLand[appnotifi[msg.sender].AddLand.length-1];
+          appnotifi[msg.sender].AddLand.length--;
+          
+         return value;
         
     }
     

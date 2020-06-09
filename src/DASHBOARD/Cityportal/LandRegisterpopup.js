@@ -203,13 +203,13 @@ this.setState({Account: Acc[0]});
   //      )
 
 
-       this.setState({CompleteAddress: this.state.LandNo+" "+this.state.Street+" "+this.state.PostCode+" "+this.state.City+" "+this.state.Province+" "+this.state.Country});
+      // await this.setState({CompleteAddress: this.state.LandNo+" "+this.state.Street+" "+this.state.PostCode+" "+this.state.City+" "+this.state.Province+" "+this.state.Country});
   
   
 
 
       
-      const transaction = await LandAbi.methods.LandRegistration(this.state.CompleteAddress, this.state.City, this.state.LandArea,this.state.Meta,this.state.SerialNo).send({
+      const transaction = await LandAbi.methods.LandRegistration(this.state.LandNo+" "+this.state.Street+" "+this.state.PostCode+" "+this.state.City+" "+this.state.Province+" "+this.state.Country, this.state.City, this.state.LandArea,this.state.Meta,this.state.SerialNo).send({
         from : this.state.Account });
        if(!transaction){
          console.log("Transaction Faild!!!");

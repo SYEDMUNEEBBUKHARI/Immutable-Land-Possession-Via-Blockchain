@@ -121,7 +121,7 @@ class Register extends Component{
         ,ipfsHash: this.state.ipfsHash
         }
         
-        axios.post("http://localhost:5000/Register/add", finaldata).
+        axios.post("http://localhost:5000/api/add", finaldata).
         then(res=>{console.log(res.data)});
         
         this.setState({

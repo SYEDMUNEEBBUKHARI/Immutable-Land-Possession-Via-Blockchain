@@ -103,7 +103,8 @@ return(
 &nbsp;
 &nbsp;
 
-  <a href=""> <GoHome className="iconcolor" /> Home          </a>
+  <a href=""> <GoHome className="iconcolor" /> &nbsp;
+&nbsp;Home          </a>
   
 </li>
    
@@ -111,16 +112,19 @@ return(
 <li>
 &nbsp;
 &nbsp;
- <a href="#turn"> <GiTeacher  className="iconcolor" /> Services          </a></li>
+ <a href="#turn"> <GiTeacher  className="iconcolor" /> &nbsp;
+&nbsp;Services          </a></li>
 
  <li>
 &nbsp;
 &nbsp;
- <button  className="btn btn" onClick={()=>this.chkcity()} > <FiPocket  className="iconcolor" /> Company Portal       </button></li>
+ <a style={{color: 'black'}} onClick={()=>this.chkcity()} > <FiPocket  className="iconcolor" /> &nbsp;
+&nbsp;Company Portal       </a></li>
  <li>
 &nbsp;
 &nbsp;
- <button  className="btn btn" onClick={()=>this.showpopup()} > <GiModernCity className="iconcolor" /> City Portal        </button></li>
+ <a style={{color: 'black'}}  onClick={()=>this.showpopup()} > <GiModernCity className="iconcolor" /> &nbsp;
+&nbsp;City Portal        </a></li>
 <br />
 <br />
 <br />
