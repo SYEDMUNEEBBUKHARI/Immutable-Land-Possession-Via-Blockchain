@@ -3,8 +3,7 @@ const HDWalletProvider = require('truffle-hdwallet-provider')
 const Web3 = require('web3');
 const { interface, bytecode } = require('./compile');
 const provider = new HDWalletProvider(
-  'second actor venue wreck easily prison brain anger prison card bicycle model',
-  'https://rinkeby.infura.io/v3/b93d91e7f1d442f28e9d8536b47e0b44'
+  '',''
 );
 const web3 = new Web3(provider);
 
